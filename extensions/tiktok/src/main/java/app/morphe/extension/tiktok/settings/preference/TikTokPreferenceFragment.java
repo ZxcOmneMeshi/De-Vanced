@@ -16,6 +16,7 @@ import app.morphe.extension.shared.settings.preference.AbstractPreferenceFragmen
 import app.morphe.extension.tiktok.settings.preference.categories.DownloadsPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.ExtensionPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.FeedFilterPreferenceCategory;
+import app.morphe.extension.tiktok.settings.preference.categories.PromoPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
 
 @SuppressWarnings("deprecation")
@@ -59,6 +60,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         new FeedFilterPreferenceCategory(context, preferenceScreen);
         new DownloadsPreferenceCategory(context, preferenceScreen);
         new SimSpoofPreferenceCategory(context, preferenceScreen);
+        new PromoPreferenceCategory(context, preferenceScreen);
         new ExtensionPreferenceCategory(context, preferenceScreen);
     }
 }

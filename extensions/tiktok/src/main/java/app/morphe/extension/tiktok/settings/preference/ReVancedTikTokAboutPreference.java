@@ -18,11 +18,10 @@ public class ReVancedTikTokAboutPreference extends Preference {
         super(context);
 
         setTitle("About");
-        setSummary("About De-ReVanced");
+        setSummary("hate this project - TikTok Mod");
 
         setOnPreferenceClickListener(pref -> {
-            // Redirect to De-ReVanced GitHub repo when user clicks the "About" row.
-            app.morphe.extension.shared.Utils.openLink("https://github.com/RookieEnough/De-ReVanced");
+            app.morphe.extension.shared.Utils.openLink("https://t.me/hatethisproject");
             return true;
         });
     }

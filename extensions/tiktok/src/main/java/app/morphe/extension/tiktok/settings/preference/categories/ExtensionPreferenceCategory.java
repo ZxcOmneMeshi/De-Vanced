@@ -39,12 +39,12 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
 
         var exportLogs = new ExportLogToClipboardPreference(context);
         exportLogs.setTitle("Export debug logs");
-        exportLogs.setSummary("Copy De-ReVanced debug logs to clipboard.");
+        exportLogs.setSummary("Copy debug logs to clipboard.");
         addPreference(exportLogs);
 
         var clearLogs = new ClearLogBufferPreference(context);
         clearLogs.setTitle("Clear debug logs");
-        clearLogs.setSummary("Clear stored De-ReVanced debug logs.");
+        clearLogs.setSummary("Clear stored debug logs.");
         addPreference(clearLogs);
     }
 }

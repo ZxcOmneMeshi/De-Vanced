@@ -5,8 +5,10 @@
 
 package app.morphe.extension.tiktok.settings;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 
 import com.bytedance.ies.ugc.aweme.commercialize.compliance.personalization.AdPersonalizationActivity;
@@ -22,9 +25,6 @@ import com.bytedance.ies.ugc.aweme.commercialize.compliance.personalization.AdPe
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-/**
- * Hooks AdPersonalizationActivity to inject a custom {@link TikTokPreferenceFragment}.
- */
 @SuppressWarnings({"deprecation", "NewApi", "unused"})
 public class TikTokActivityHook {
     public static Object createSettingsEntry(String entryClazzName, String entryInfoClazzName) {
@@ -34,7 +34,7 @@ public class TikTokActivityHook {
             Constructor entryConstructor = entryClazz.getConstructor(entryInfoClazz);
             Constructor entryInfoConstructor = entryInfoClazz.getDeclaredConstructors()[0];
             Object buttonInfo = entryInfoConstructor.newInstance(
-                    "De-ReVanced settings", null, (View.OnClickListener) view -> startSettingsActivity(), "revanced");
+                    "hate this project", null, (View.OnClickListener) view -> startSettingsActivity(), "revanced");
             return entryConstructor.newInstance(buttonInfo);
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException |
                  InstantiationException e) {
@@ -55,6 +55,8 @@ public class TikTokActivityHook {
         }
 
         SettingsStatus.load();
+
+        showPromoIfNeeded(base);
 
         LinearLayout linearLayout = new LinearLayout(base);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, -1));
@@ -87,5 +89,20 @@ public class TikTokActivityHook {
             Logger.printDebug(() -> "Utils.getContext() return null");
         }
     }
-}
 
+    private static void showPromoIfNeeded(Context context) {
+        if (Settings.PROMO_SHOWN.get()) return;
+
+        new AlertDialog.Builder(context)
+                .setTitle("hate this project")
+                .setMessage("TikTok Mod by @hatethisproject\n\nUpdates, support & news:\nt.me/hatethisproject")
+                .setPositiveButton("Open channel", (dialog, which) -> {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/hatethisproject")));
+                })
+                .setNegativeButton("Later", null)
+                .setCancelable(true)
+                .show();
+
+        Settings.PROMO_SHOWN.save(true);
+    }
+}
